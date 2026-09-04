@@ -48,17 +48,17 @@ Partial Class frmApps
         Me.btnAppsRun.TabIndex = 1
         Me.btnAppsRun.Text = "&Run"
         Me.btnAppsRun.UseVisualStyleBackColor = True
-      '
-      'frmApps
-      '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        '
+        'frmMS
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(672, 313)
         Me.Controls.Add(Me.btnAppsRun)
         Me.Controls.Add(Me.lvApps)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-      Me.Name = "frmApps"
-      Me.Text = "Microsoft"
+        Me.Name = "frmMS"
+        Me.Text = "Microsoft"
         Me.ResumeLayout(False)
 
     End Sub

@@ -1,6 +1,7 @@
 # SysCloak
 
-A Windows privacy utility
+A Windows privacy utility.
+This tool disables AI / ads / recommendations / suggestions
 
 
 
@@ -33,6 +34,7 @@ Just run SysCloak.exe
 
 ## Roadmap
 
+* 2026-09-04: Add: Microsoft Edge policies
 * 2026-09-02: Add: Implement context menu (check/uncheck options)
 * 2026-09-02: Fix: column width calculation
 * 2026-09-02: Add: default values
