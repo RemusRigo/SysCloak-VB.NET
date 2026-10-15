@@ -25,7 +25,15 @@ Public Class frmApps
 
       LV_AddGroup(lvApps, grp, "Microsoft Edge")
       If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Alternate Error Pages Enabled", True, True)
-      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "New Tab Page Hide Default Top Sites", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Compose Inline Enabled", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Copilot CDP Page Context", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Copilot Page Context", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Edge Entra Copilot Page Context", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Edge History AI Search Enabled", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "GenAI Local Foundational Model Settings", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Hubs Sidebar Enabled", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "New TabPage Bing Chat Enabled", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "New TabPage Hide Default Top Sites", True, True)
       If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Show Acrobat Subscription Button", True, True)
       If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Show Recommendations Enabled", True, True)
       If IsAppElevated() Then LVCB_AddItem(lvApps, grp, "Spotlight Experiences And Recommendations Enabled", True, True)
@@ -58,7 +66,71 @@ Public Class frmApps
                      End If
                      pbActions.Value += 1
 
-                  Case "New Tab Page Hide Default Top Sites"
+                  Case "Compose Inline Enabled"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "ComposeInlineEnabled", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "ComposeInlineEnabled", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Copilot CDP Page Context"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "CopilotCDPPageContext", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "CopilotCDPPageContext", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Copilot Page Context"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "CopilotPageContext", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "CopilotPageContext", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Edge Entra Copilot Page Context"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "EdgeEntraCopilotPageContext", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "EdgeEntraCopilotPageContext", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Edge History AI Search Enabled"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "EdgeHistoryAISearchEnabled", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "EdgeHistoryAISearchEnabled", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "GenAI Local Foundational Model Settings"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "GenAILocalFoundationalModelSettings", 0)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "GenAILocalFoundationalModelSettings", 1)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Hubs Sidebar Enabled"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "HubsSidebarEnabled", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "HubsSidebarEnabled", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "New TabPage Bing Chat Enabled"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "NewTabPageBingChatEnabled", 1)
+                     Else ' Cloak
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "NewTabPageBingChatEnabled", 0)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "New TabPage Hide Default Top Sites"
                      If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
                         RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Edge", "NewTabPageHideDefaultTopSites", 0)
                      Else ' Cloak

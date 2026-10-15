@@ -32,8 +32,14 @@ Public Class frmMS
       LVCB_AddItem(lvMS, grp, "Disable Recent Apps", True, True)
       LVCB_AddItem(lvMS, grp, "Disable Tracking of most-frequently-used (MFU) apps in the Start menu and File Explorer", True, True)
 
-      LV_AddGroup(lvMS, grp, "Start Menu")
-      LVCB_AddItem(lvMS, grp, "Allow Search To Use Location", True, True)
+      LV_AddGroup(lvMS, grp, "Copilot")
+      LVCB_AddItem(lvMS, grp, "Disable Windows Copilot", True, True)
+
+      LV_AddGroup(lvMS, grp, "Location And Sensors")
+      If IsAppElevated() Then LVCB_AddItem(lvMS, grp, "DisableLocation", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvMS, grp, "DisableLocationScripting", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvMS, grp, "DisableSensors", True, True)
+      If IsAppElevated() Then LVCB_AddItem(lvMS, grp, "DisableWindowsLocationProvider", True, True)
 
       LV_AddGroup(lvMS, grp, "Windows AI")
       LVCB_AddItem(lvMS, grp, "Disable AI Data Analysis", True, True)
@@ -54,10 +60,10 @@ Public Class frmMS
          If grp Is Nothing Then Continue For
 
          Select Case grp.Header
-            Case "Copilot"
+
+            Case "Copilot" '-----------------------------------------------------------------------
                Select Case item.Text
 
-                  '--------------------------------------------------------------------------------
                   Case "Disable Windows Copilot"
                      If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
                         RegWriteDWord(Registry.CurrentUser, "Software\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", 0)
@@ -82,10 +88,46 @@ Public Class frmMS
 
                End Select
 
-            Case "Edge User Interface"
+            Case "Location And Sensors" '-----------------------------------------------------------------------
                Select Case item.Text
 
-                  '--------------------------------------------------------------------------------
+                  Case "Disable Location"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 0)
+                     Else ' Cloack
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Disable Location Scripting"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 0)
+                     Else ' Cloack
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Disable Sensors"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableSensors", 0)
+                     Else ' Cloack
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableSensors", 1)
+                     End If
+                     pbActions.Value += 1
+
+                  Case "Disable Windows Location Provider"
+                     If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 0)
+                     Else ' Cloack
+                        RegWriteDWord(Registry.LocalMachine, "Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1)
+                     End If
+                     pbActions.Value += 1
+
+               End Select
+
+            Case "Edge User Interface" '-----------------------------------------------------------
+               Select Case item.Text
+
                   Case "Turn Off Backstack"
                      If DirectCast(item.Tag, LV_CheckBoxData).CheckState Then ' Restore default                    
                         RegWriteDWord(Registry.CurrentUser, "Software\Policies\Microsoft\Windows\EdgeUI", "TurnOffBackstack", 0)
